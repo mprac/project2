@@ -15,13 +15,26 @@ chatrooms = ['public']
 @app.route("/", methods=["GET", "POST"])
 def index():
     if 'user' in session:
-        username = session['user']
-        return redirect(url_for('chat'), username=username)
+        user = session['user']
+        return redirect(url_for('chat'))
     if request.method == "POST":
         user = request.form.get('username')
-        username = session['user']
-        return redirect(url_for('chat.html', username=username))
+        session['user'] = user
+        return redirect(url_for('chat'))
     return render_template('index.html')
+
+@app.route("/chat", methods=["GET","POST"])
+def chat():
+    if 'user' in session:
+        user = session['user']
+        return render_template('chat.html', user=user)
+    else:
+        return redirect(url_for('index'))
+
+@app.route("/logout", methods=["POST"])
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     socketio.run(app)

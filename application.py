@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
-users = ['guest']
+users = ['guest'] #check dictionaries 
 chatrooms = ['public']
 
 @app.route("/", methods=["GET", "POST"])
@@ -19,15 +19,24 @@ def index():
         return redirect(url_for('chat'))
     if request.method == "POST":
         user = request.form.get('username')
-        session['user'] = user
-        return redirect(url_for('chat'))
+        if users.count(user) == 0:
+            session['user'] = user
+            return redirect(url_for('chat'))
+        else:
+            message = 'username already exists, please choose a different username'
+            return render_template('index.html', message=message)
     return render_template('index.html')
+
+@socketio.on('user login')
+def enter(data):
+
 
 @app.route("/chat", methods=["GET","POST"])
 def chat():
     if 'user' in session:
         user = session['user']
-        return render_template('chat.html', user=user)
+        users.append(user)
+        return render_template('chat.html', user=user, users=users)
     else:
         return redirect(url_for('index'))
 

@@ -7,4 +7,10 @@
 {% block body %}
 Hello {{ user }} 
 <form action="{{url_for('logout')}}" method="POST"><button type="submit">EXIT</button></form>
+{% if message is defined %}
+<div class="alert alert-danger" role="alert">
+    {{ message }}
+</div>
+{% endif %}
+{{ users }}
 {% endblock %} 

@@ -1,0 +1,4 @@
+1. check if user is in chat if yes go to step 3
+2. disabel all input fields and have user join
+3. load channel list and username
+4. send/recieve messages, create channels

@@ -8,6 +8,10 @@ from flask_session import Session
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
+# () tuple - a collection which us ordered and changeable. allows duplicate
+# [] list - a collection which is ordered and unchangeable. allows duplicate
+# {} set - a collection which is unordered and unindexed. no duplicates
+# {} dictionary - is a collection which is unordered changeable and indexed.no duplicates
 
 user = []
 usersList = {} 

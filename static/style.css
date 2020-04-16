@@ -1,0 +1,35 @@
+#rightColumn {
+    background: #F1F1F1;
+    border-radius: 0px 10px 10px 0px;
+    min-height: 500px;
+    padding-top: 22px;
+}
+
+#leftColumn {
+    background: #F1F1F1;
+    border-radius: 10px 0px 0px 10px;
+    min-height: 500px;
+    padding-top: 22px;
+}
+
+#chatcenter{
+    padding-top: 22px;
+}
+.chatbox {
+    border: 1px solid rgba(0, 0, 0, 0.32);
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-top: 20px;
+    min-height: 500px;
+}
+
+.bottom {
+    position: absolute;
+    bottom: 22px;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+ul {
+    list-style-type: none;
+}

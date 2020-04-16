@@ -3,90 +3,10 @@
 {% block title %}
 Flack
 {% endblock %}
-{% block js %}
-
-{%endblock%}
 
 {% block body %}
-
-<div class="container chatbox">
-    <div class="row">
-        <div id="channelList" class="col-3">
-            <h4>Create Channel</h4>
-            <form id="channel" class="form-inline">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">#</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Channel" aria-label="Channel"
-                        aria-describedby="basic-addon1">
-                </div>
-            </form>
-        </div>
-        <div class="col-1"></div>
-        <div id="chatcenter" class="col-4">
-            <h4>Live Chat</h4>
-            <div class="row">
-                <div id="messages">
-                    messages
-                </div>
-            </div>
-            <div id="sendmessage" class="row">
-                <div class="input-group mb-3 bottom">
-                    <input id="messageInput" type="text" class="form-control" placeholder="Enter message"
-                        aria-label="enter message" aria-describedby="sendmessagebutton">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit" id="sendmessagebutton">Send</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-1"></div>
-        <div id="usernameList" class="col-3">
-            <h4>Join Chat</h4>
-
-
-
-            <div class="usernameList">
-                <ul id="userslist">
-
-                </ul>
-            </div>
-        </div>
+    <div id="chat"> 
     </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            {% if error is defined%}
 
-            {{error}}
-
-            {% endif %}
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Enter username to join</h5>
-            </div>
-       
-            <div class="modal-body">
-                <form id="Selectusername" class="form-inline">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">@</span>
-                        </div>
-                        <input id="username" type="text" class="form-control" placeholder="username"
-                            aria-label="username" aria-describedby="basic-addon1">
-                    </div>
-
-           
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Join</button>
-                </div>
-            </form>
-        </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

@@ -1,39 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
-    <!-- Index Javascript -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="{{url_for('static', filename='index.js')}}"></script>
-    <title>{% block title %}{% endblock %}</title>
-     <!-- Page JS -->
-     {% block js %}
-     {% endblock %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+  <!-- Index Javascript -->
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="{{url_for('static', filename='index.js')}}"></script>
+  <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body>
-    <nav class="navbar navbar-light bg-light">
-        <div class="container">
-        <a class="navbar-brand" id="usernameTitle">User In Channel</a>
-        <form class="form-inline">
-          <form action="{{url_for('logout')}}" method="POST"><button class="btn btn-primary my-2 my-sm-0" type="submit">EXIT</button></form>
-        </form>
+<body id="body">
+  <!--
+  Top Nav
+-->
+
+  <nav class="navbar navbar-light bg-light sticky-top">
+    <h3 class="navbar-brand" id="userinchannel">Flack</h3>
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <div class="btn-group" role="group">
+        <button class="btn btn-outline-primary" type="button" data-toggle="modal"
+          data-target="#listofchannelsmodal">Channels</button>
+          <button class="btn btn-outline-primary" type="button" data-toggle="modal"
+          data-target="#listofusersmodal">Users</button>
+      </div>
+      <form class="btn-group">
+        <button class="btn btn-outline-primary" id="exit" type="submit">EXIT</button>
+      </form>
     </div>
-      </nav>
-    {% block body %}
+  </nav>
 
-    {% endblock %}
-    
+  <!--
+  End Top Nav
+-->
+<!--
+  List of channels modal
+-->
+  <div class="modal fade" id="listofchannelsmodal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Select a channel to join</h5>
+        </div>
+        <div id="channelList" class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+  End Channel List Modal
+-->
+<!--
+  List of joinedusers modal
+-->
+<div class="modal fade" id="listofusersmodal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalScrollableTitle">Joined Users</h5>
+    </div>
+    <div class="modal-body">
+     <p id="joinedUsers"></p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<!--
+End joinedusers Modal
+-->
+  {% block body %}
+
+  {% endblock %}
+  <!--
+  Bottom Nav
+-->
+<div class="container-fluid">
+  <nav class="navbar fixed-bottom navbar-light bg-light bottom-nav">
+    <div class="input-group d-flex ">
+      <!-- <textarea id="messageChannelInput" class="form-control p-2 flex-grow-1" aria-label="With textarea"
+        placeholder="Message or New Channel" style="border-radius: 0%;" autocomplete="off"></textarea> -->
+        <input id="messageChannelInput" class="form-control p-2 flex-grow-1" aria-label="With textarea"
+        placeholder="Message or New Channel" style="border-radius: 0%;" autocomplete="off" type="text">
+      <div class="input-group-append">
+        <button class="btn btn-outline-primary p-2" type="submit" id="sendMessageButton">Send</button>
+        <button class="btn btn-outline-primary p-2" type="submit" id="createChannelButton"
+          style="border-radius: 0%;">&oplus;</button>
+      </div>
+    </div>
+  </nav>
+</div>
+  
+  <!--
+  End bottom Nav
+-->
+  <!-- 
+    Modal login
+ -->
+  <div class="modal fade" id="joinChatModal" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="joinChatModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="joinChatModalLabel">Enter Username To Join</h5>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">@</span>
+            </div>
+            <input id="username" type="text" class="form-control" placeholder="username" aria-label="username"
+              aria-describedby="basic-addon1">
+          </div>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" id="userJoin" class="btn btn-primary">Join</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+  End Modal login
+-->
+
 </body>
-
 </html>

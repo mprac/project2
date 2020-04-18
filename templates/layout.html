@@ -22,7 +22,6 @@
   <script src="{{url_for('static', filename='index.js')}}"></script>
   <title>{% block title %}{% endblock %}</title>
 </head>
-
 <body id="body">
   <!--
   Top Nav
@@ -35,7 +34,7 @@
       <div class="btn-group" role="group">
         <button class="btn btn-outline-primary" type="button" data-toggle="modal"
           data-target="#listofchannelsmodal">Channels</button>
-          <button class="btn btn-outline-primary" type="button" data-toggle="modal"
+        <button class="btn btn-outline-primary" type="button" data-toggle="modal"
           data-target="#listofusersmodal">Users</button>
       </div>
       <form class="btn-group">
@@ -47,7 +46,7 @@
   <!--
   End Top Nav
 -->
-<!--
+  <!--
   List of channels modal
 -->
   <div class="modal fade" id="listofchannelsmodal" tabindex="-1" role="dialog"
@@ -58,7 +57,7 @@
           <h5 class="modal-title" id="exampleModalScrollableTitle">Select a channel to join</h5>
         </div>
         <div id="channelList" class="modal-body">
-          
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -69,26 +68,26 @@
   <!--
   End Channel List Modal
 -->
-<!--
+  <!--
   List of joinedusers modal
 -->
-<div class="modal fade" id="listofusersmodal" tabindex="-1" role="dialog"
-aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-<div class="modal-dialog modal-dialog-scrollable" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalScrollableTitle">Joined Users</h5>
-    </div>
-    <div class="modal-body">
-     <p id="joinedUsers"></p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <div class="modal fade" id="listofusersmodal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Joined Users</h5>
+        </div>
+        <div class="modal-body">
+          <p id="joinedUsers"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-</div>
-<!--
+  <!--
 End joinedusers Modal
 -->
   {% block body %}
@@ -97,22 +96,22 @@ End joinedusers Modal
   <!--
   Bottom Nav
 -->
-<div class="container-fluid">
-  <nav class="navbar fixed-bottom navbar-light bg-light bottom-nav">
-    <div class="input-group d-flex ">
-      <!-- <textarea id="messageChannelInput" class="form-control p-2 flex-grow-1" aria-label="With textarea"
+  <div class="container-fluid">
+    <nav class="navbar fixed-bottom navbar-light bg-light bottom-nav">
+      <div class="input-group d-flex ">
+        <!-- <textarea id="messageChannelInput" class="form-control p-2 flex-grow-1" aria-label="With textarea"
         placeholder="Message or New Channel" style="border-radius: 0%;" autocomplete="off"></textarea> -->
         <input id="messageChannelInput" class="form-control p-2 flex-grow-1" aria-label="With textarea"
-        placeholder="Message or New Channel" style="border-radius: 0%;" autocomplete="off" type="text">
-      <div class="input-group-append">
-        <button class="btn btn-outline-primary p-2" type="submit" id="sendMessageButton">Send</button>
-        <button class="btn btn-outline-primary p-2" type="submit" id="createChannelButton"
-          style="border-radius: 0%;">&oplus;</button>
+          placeholder="Message or New Channel" style="border-radius: 0%;" autocomplete="off" type="text">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary p-2" type="submit" id="sendMessageButton">Send</button>
+          <button class="btn btn-outline-primary p-2" type="submit" id="createChannelButton"
+            style="border-radius: 0%;">&oplus;</button>
+        </div>
       </div>
-    </div>
-  </nav>
-</div>
-  
+    </nav>
+  </div>
+
   <!--
   End bottom Nav
 -->
@@ -145,6 +144,5 @@ End joinedusers Modal
   <!--
   End Modal login
 -->
-
 </body>
 </html>

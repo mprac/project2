@@ -51,6 +51,11 @@ ul {
     height: 50px;
     max-height: 120px; }
 
+.delete-button {
+  background: transparent;
+  border: none;
+  color: red; }
+
 #chat {
   width: 100%;
   display: flex;

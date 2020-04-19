@@ -1,8 +1,7 @@
 import os
 
-from flask import Flask, session, render_template, url_for, redirect, request
-from flask_socketio import SocketIO, emit, send, join_room, leave_room
-from flask_session import Session
+from flask import Flask, render_template, url_for, redirect, request
+from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -12,26 +11,25 @@ socketio = SocketIO(app)
 # {} set - a collection which is unordered and unindexed. no duplicates
 # {} dictionary - is a collection which is unordered changeable and indexed.no duplicates
 
-joinedUsers = {}  # WHY IF THE USERNAME IS IN THE CHANNELS LIST - channel list holds channel name and messages not users info
-channels = {}  # use this to store the channel name to be added and removed in localstorage
-channels['general'] = []
-allChannels = ['general']  # list of all channels to
-# numUsers = 0 # show how many users joined flack
+joinedUsers = {}  # holds all names of users that joined
+channels = {}  # stores all channel names and message
+channels['general'] = []  # start with general channel for when users join
+allChannels = ['general']  # list of all created channels
 
 
 @app.route("/")
 def index():
     return render_template('index.html')
 
-# when website loads, show all messages.
+# when website loads, show all messages and channels
 @socketio.on('connect')
 def broadcastdata():
     emit('load data', {'channels': channels, 'allchannels': allChannels})
 
-# check if user is in joinedUsers list - OK.
+# check if user is in joinedUsers list
 @socketio.on('user joined')
 def userjoined(data):
-    user = data['person'].strip()
+    user = data['person'].strip()  # remove spaces
     if user in joinedUsers:
         error = "User already exists please use a different name"
         emit('error', {'error': error})
@@ -42,15 +40,9 @@ def userjoined(data):
         error = "Username cannot contain spaces"
         emit('error', {'error': error})
     else:
-        userInfo = {'id': request.sid, 'username': data['person']}
-        joinedUsers[data['person']] = userInfo
+        joinedUsers[user] = request.sid
         emit('user validation', {'user': user})
 # END check if user is in joinedUsers list
-
-# broadcast data
-# @socketio.on('update data')
-# def updatedata():
-#     emit('broadcast data', {'joinedUsers': joinedUsers}, broadcast=True)
 
 # send message
 @socketio.on('send message')
@@ -58,9 +50,14 @@ def message(data):
     # add data to dictionary
     message = {'message': data['message'],
                'username': data['username'], 'date': data['date']}
-    channels[data['channel']].append(message)  # adds message data to general
+    channels[data['channel']].append(message)
+    # get the index and add update message to hold index value - used to delete message using del
+    for index in range(len(channels[data['channel']])):
+        messageIndex = {'messageIndex': index}
+        channels[data['channel']][index].update(messageIndex)
+    # adds message data to channel
     if (len(channels[data['channel']]) > 100):
-        channels[data['channel']].pop(0)
+        channels[data['channel']].pop(0)  # delete oldest message with index 0
     emit('load data', {'channels': channels,
                        'allchannels': allChannels}, broadcast=True)
 # END send message
@@ -89,42 +86,51 @@ def create_channel(data):
 @socketio.on('join')
 def on_join(data):
     username = data['username']
-    room = data['channel']
+    # message to indicate user joiined
     message = {'message': data['message'],
                'username': data['username'], 'date': data['date']}
-    #oin_room(room)
-    channels[data['channel']].append(message)  # adds message data to general
+    channels[data['channel']].append(message)
+    for index in range(len(channels[data['channel']])):
+        messageIndex = {'messageIndex': index}
+        channels[data['channel']][index].update(messageIndex)
     if (len(channels[data['channel']]) > 100):
         channels[data['channel']].pop(0)
     emit('load data', {'channels': channels,
                        'allchannels': allChannels}, broadcast=True)
-    #send('load data', username + ' has entered the room.', room=room)
 # END join channel_room
 
 # leave channel_room
 @socketio.on('leave')
 def on_leave(data):
     username = data['username']
-    room = data['channel']
     message = {'message': data['message'],
                'username': data['username'], 'date': data['date']}
-    #leave_room(room)
     channels[data['channel']].append(message)
+    for index in range(len(channels[data['channel']])):
+        messageIndex = {'messageIndex': index}
+        channels[data['channel']][index].update(messageIndex)
     if (len(channels[data['channel']]) > 100):
         channels[data['channel']].pop(0)
     emit('load data', {'channels': channels,
                        'allchannels': allChannels}, broadcast=True)
 # END leave channel_room
 
+# delete message
+@socketio.on('deleteMessage')
+def delete_message(data):
+    index = int(data['index'])
+    del channels[data['channel']][index]
+    emit('load data', {'channels': channels,
+                       'allchannels': allChannels}, broadcast=True)
+# END delet message
+                       
 # exit chat
 @socketio.on('exit')
 def exit(data):
-    user = data['person']
+    user = data['username']
     joinedUsers.pop(user)
-    # emit('load data', {'joinedUsers': joinedUsers, 'allchannels': allChannels}, broadcast=True)
     return redirect(url_for('index'))
 # END exit chat
-
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)

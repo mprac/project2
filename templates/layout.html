@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,36 +14,32 @@
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script> -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script src="{{url_for('static', filename='index.js')}}"></script>
   <title>{% block title %}{% endblock %}</title>
 </head>
+
 <body id="body">
   <!--
   Top Nav
 -->
-
-  <nav class="navbar navbar-light bg-light sticky-top">
+  <nav class="navbar navbar-reddish sticky-top">
     <h3 class="navbar-brand" id="userinchannel">Flack</h3>
-
     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
       <div class="btn-group" role="group">
-        <button class="btn btn-outline-primary" type="button" data-toggle="modal"
-          data-target="#listofchannelsmodal">Channels</button>
-        <button class="btn btn-outline-primary" type="button" data-toggle="modal"
-          data-target="#listofusersmodal">Users</button>
+        <button class="btn btn-outline-primary" type="button" data-toggle="modal" data-target="#listofchannelsmodal"
+          id="selectChannel"><span>Channels</span></button>
       </div>
       <form class="btn-group">
-        <button class="btn btn-outline-primary" id="exit" type="submit">EXIT</button>
+        <button class="btn btn-outline-primary" id="exit" type="submit"><span>EXIT</span></button>
       </form>
     </div>
   </nav>
-
   <!--
   End Top Nav
 -->
@@ -57,7 +54,6 @@
           <h5 class="modal-title" id="exampleModalScrollableTitle">Select a channel to join</h5>
         </div>
         <div id="channelList" class="modal-body">
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -97,7 +93,7 @@ End joinedusers Modal
   Bottom Nav
 -->
   <div class="container-fluid">
-    <nav class="navbar fixed-bottom navbar-light bg-light bottom-nav">
+    <nav class="navbar fixed-bottom navbar-reddish bottom-nav">
       <div class="input-group d-flex ">
         <!-- <textarea id="messageChannelInput" class="form-control p-2 flex-grow-1" aria-label="With textarea"
         placeholder="Message or New Channel" style="border-radius: 0%;" autocomplete="off"></textarea> -->
@@ -111,7 +107,6 @@ End joinedusers Modal
       </div>
     </nav>
   </div>
-
   <!--
   End bottom Nav
 -->
@@ -135,8 +130,7 @@ End joinedusers Modal
           </div>
         </div>
         <div class="modal-footer">
-
-          <button type="button" id="userJoin" class="btn btn-primary">Join</button>
+          <button type="button" id="userJoin" class="btn btn-secondary">Join</button>
         </div>
       </div>
     </div>
@@ -145,4 +139,5 @@ End joinedusers Modal
   End joine chat modal
 -->
 </body>
+
 </html>

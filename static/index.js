@@ -164,13 +164,14 @@ function submitmessage(data) {
             messageButton.className = 'delete-button';
             messageButton.setAttribute('id', data['channels'][inChannel][x]['messageIndex']);
             messageButton.innerHTML = ' &#10006;';
+            
 
             jQuery('#chat').append(message);
             message.append(messageValue);
-            message.append(messageButton);
             message.append(messageUserDate);
             messageUserDate.append(messageUser);
             messageUserDate.append(messageDate);
+            messageUserDate.append(messageButton);
             $(window).scrollTop(999999999);
             messageButton.onclick = deleteMessage;
         } else {

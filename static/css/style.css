@@ -1,40 +1,6 @@
-#leftColumn {
-  background: #176FA6;
-  border-radius: 10px 0px 0px 10px;
-  min-height: 500px;
-  padding-top: 22px;
-  color: #F2F2F2; }
-
-#rightColumn {
-  background: #F2F2F2;
-  border-radius: 0px 10px 10px 0px;
-  min-height: 500px;
-  padding-top: 22px;
-  color: #0D0D0D; }
-
-@media (min-width: 768px) {
-  #chatcenter {
-    padding: 50px 10px 50px 10px; } }
-
-#chatcenter {
-  padding: 50px 50px 50px 50px; }
-
-.chatbox {
-  border: 1px solid #F2F2F2;
-  box-sizing: border-box;
-  border-radius: 10px;
-  margin-top: 20px;
-  min-height: 500px;
-  max-height: 500px; }
-
-.bottom {
-  position: absolute;
-  bottom: 22px;
-  border-radius: 10px;
-  max-width: 400px; }
-
-ul {
-  list-style-type: none; }
+/* Color Theme Swatches in Hex */
+body {
+  background-color: #fcfcfc; }
 
 #channelList {
   margin: 20px 0 20px 0px;
@@ -51,10 +17,53 @@ ul {
     height: 50px;
     max-height: 120px; }
 
+.btn-outline-primary {
+  color: #F2CB07;
+  border-color: #F2CB07; }
+  .btn-outline-primary:hover, .btn-outline-primary:active {
+    color: #06080D !important;
+    background-color: #F2CB07 !important;
+    border-color: #F2CB07 !important; }
+
+.btn-secondary {
+  color: #F2CB07;
+  background-color: #D9435F;
+  border-color: #F2CB07; }
+  .btn-secondary:hover, .btn-secondary:active {
+    color: #06080D !important;
+    background-color: #F2CB07 !important;
+    border-color: #F2CB07 !important; }
+
+.navbar-reddish {
+  background-color: #D9435F !important; }
+  .navbar-reddish .navbar-brand, .navbar-reddish:focus, .navbar-reddish:hover {
+    color: #F2CB07; }
+
 .delete-button {
   background: transparent;
   border: none;
-  color: red; }
+  color: #E30712; }
+
+@media (max-width: 575.98px) {
+  #exit span {
+    display: none; }
+  #exit::after {
+    content: '\2715'; }
+  #selectChannel span {
+    display: none; }
+  #selectChannel::after {
+    content: '\266F'; } }
+
+.modal-content {
+  background-color: #f8f9fa; }
+  .modal-content .modal-header {
+    background-color: #D9435F;
+    color: #F2CB07;
+    border-bottom: 0px !important; }
+  .modal-content .modal-body {
+    background-color: #f8f9fa; }
+  .modal-content .modal-footer {
+    border-top: 0px !important; }
 
 #chat {
   width: 100%;
@@ -78,19 +87,20 @@ ul {
   #chat .otheruser {
     align-items: flex-start; }
   #chat .otheruser .message {
+    color: #06080D;
     margin-right: 25%;
     background-color: #eee;
     position: relative; }
   #chat .thisuser {
     align-items: flex-end; }
   #chat .thisuser .message {
-    color: white;
+    color: #fff;
     margin-left: 25%;
-    background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+    background: linear-gradient(to bottom, #72F2F2 0%, #06080D 100%);
     background-attachment: fixed;
     position: relative; }
   #chat .usernameDate {
     font-size: 0.7rem;
-    color: #8C8C8C; }
+    color: #D9435F; }
     #chat .usernameDate .username::after {
       content: ', \00a0'; }

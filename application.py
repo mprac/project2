@@ -115,14 +115,14 @@ def on_leave(data):
                        'allchannels': allChannels}, broadcast=True)
 # END leave channel_room
 
-# delete message
+# delete message Personal Touch
 @socketio.on('deleteMessage')
 def delete_message(data):
     index = int(data['index'])
     del channels[data['channel']][index]
     emit('load data', {'channels': channels,
                        'allchannels': allChannels}, broadcast=True)
-# END delet message
+# END delete message Personal Touch
                        
 # exit chat
 @socketio.on('exit')

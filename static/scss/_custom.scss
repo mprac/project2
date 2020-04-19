@@ -1,51 +1,6 @@
-#leftColumn {
-    background: $darkblue;
-    border-radius: 10px 0px 0px 10px;
-    min-height: 500px;
-    padding-top: 22px;
-    color: $light;
-}
-
-#rightColumn {
-    background: $light;
-    border-radius: 0px 10px 10px 0px;
-    min-height: 500px;
-    padding-top: 22px;
-    color: $dark;
-}
-
-@media (min-width: 768px) {
-    #chatcenter{
-        padding: 50px 10px 50px 10px;
-       
+body {
+    background-color: #fcfcfc;
     }
-}
-
-#chatcenter{
-    padding: 50px 50px 50px 50px;
-   
-}
-.chatbox {
-    border: 1px solid $light;
-    box-sizing: border-box;
-    border-radius: 10px;
-    margin-top: 20px;
-    min-height: 500px;
-    max-height: 500px;
-
-
-}
-
-.bottom {
-    position: absolute;
-    bottom: 22px;
-    border-radius: 10px;
-    max-width: 400px;
-}
-
-ul {
-    list-style-type: none; 
-}
 
 #channelList {
     margin: 20px 0 20px 0px;
@@ -65,18 +20,76 @@ ul {
         max-height: 120px;
     }
 }
+//buttons + colors
+.btn-outline-primary {
+color: $yellowish;
+border-color: $yellowish;
+&:hover, &:active {
+    color: $blackish !important;
+    background-color: $yellowish !important;
+    border-color: $yellowish !important;
+    }
+}
+
+.btn-secondary {
+color: $yellowish;
+background-color: $reddish;
+border-color: $yellowish;
+&:hover, &:active {
+    color: $blackish !important;
+    background-color: $yellowish !important;
+    border-color: $yellowish !important;
+    }
+}
+
+.navbar-reddish {
+    background-color: $reddish !important;
+    .navbar-brand, &:focus, &:hover {
+        color: $yellowish;
+        }
+}
 .delete-button {
     background: transparent;
     border: none;
-    color: red;
-} 
+    color: #E30712;
+}
+@media (max-width: 575.98px) { 
+    #exit {
+        span {
+            display: none;
+        }
+        &::after {
+            content: '\2715';
+        }
+        
+    }
+    #selectChannel {
+        span {
+            display: none;
+        }
+        &::after {
+            content: '\266F';
+        }
+    }
+ }
+//Modal Colors
+.modal-content {
+    background-color: #f8f9fa;
 
-// message bubbles
+        .modal-header {
+            background-color: $reddish;
+            color: $yellowish;
+            border-bottom: 0px !important;
+        }
+        .modal-body {
+            background-color: #f8f9fa;
+        }
 
-
-
-
- 
+        .modal-footer {
+            border-top: 0px !important;
+        }
+}
+// message bubbles 
   #chat {
     width: 100%;
     display: flex;
@@ -105,6 +118,7 @@ ul {
         }
         
         .otheruser .message {
+            color: $blackish;
             margin-right: 25%;
             background-color: #eee;
             position: relative;
@@ -114,21 +128,20 @@ ul {
             align-items: flex-end;
         }
         
-        .thisuser .message {
-            color: white;
+        .thisuser .message { 
+            color: #fff;
             margin-left: 25%;
-            background: linear-gradient(to bottom, #00D0EA 0%, #0085D1 100%);
+            background: linear-gradient(to bottom, $blueish 0%, $blackish 100%);
             background-attachment: fixed;
             position: relative;
         }
         
         .usernameDate {
             font-size: 0.7rem;
-            color: #8C8C8C;
+            color: $reddish;
             .username::after {
                 content: ', \00a0';
 
             }
         }
-    
 }

@@ -4,7 +4,7 @@ Web Programming with Python and JavaScript
 
 # Project 2 | Description
 
-The project is made up of 2 html files where 1 is a template used to demonstrate templating, 3 scss files the are processed into one css file plus bootstrap, 1 javascript file, and the main application.py. 
+The project is made up of 2 html files where 1 is a template used to demonstrate templating, 3 scss files that are processed into one css file plus bootstrap, 1 javascript file, and the main application.py. 
 
 The html layout.html holds all the stylesheets and javascript from my personal files plus bootsraps framework. The file contains all the applications content which is the header, the footer section or bottom nav for messaging input, and the modals used to join the chat and switch between channels. The index.html file holds the chat section in the body of the application indicated by {% block body %}.
 
